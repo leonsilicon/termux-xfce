@@ -15,8 +15,10 @@ import { ensureTermuxSetupStorage, getTermuxPrefix } from '../utils/termux.ts'
 import { addBashrcAliases } from '../utils/bashrc.ts'
 import { CORE_DEPENDENCIES, XFCE_PACKAGES } from '../constants/dependencies.ts'
 import { DEFAULT_DIRECTORIES } from '../constants/directories.ts'
-import { input } from '@inquirer/prompts'
-import readline from 'readline-sync'
+import readline from 'node:readline/promises'
+
+const rl = readline.createInterface(process.stdin);
+
 
 // clear();
 console.log(boxen('XFCE Desktop Installation', { borderStyle: 'double' }))
@@ -24,7 +26,7 @@ console.log(boxen('XFCE Desktop Installation', { borderStyle: 'double' }))
 console.log(chalk.underline('System Compatibility Check'))
 const systemCheckResults = await getSystemCheckResults();
 
-const username = readline.question("Please enter username for proot installation: ")
+const username = await rl.question("Please enter username for proot installation: ")
 
 console.log("Ensuring Termux storage access is granted...");
 await ensureTermuxSetupStorage();
