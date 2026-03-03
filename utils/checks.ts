@@ -1,6 +1,6 @@
-import { $ } from 'bun'
 import chalk from 'chalk'
 import figures from 'figures'
+import $ from "dax";
 
 function printStatus(status: 'ok' | 'warn' | 'error', message: string) {
   if (status === 'ok') {
