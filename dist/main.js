@@ -13420,7 +13420,41 @@ var DEFAULT_DIRECTORIES = [
 
 // scripts/main.ts
 import readline from "node:readline/promises";
-var rl = readline.createInterface(process.stdin);
+// package.json
+var package_default = {
+  name: "termux-xfce",
+  version: "0.0.0",
+  type: "module",
+  private: true,
+  scripts: {
+    build: "bun build scripts/main.ts --target=node --outdir=dist"
+  },
+  devDependencies: {
+    "@types/bun": "latest",
+    "@types/console-clear": "^1.1.4"
+  },
+  peerDependencies: {
+    typescript: "^5"
+  },
+  dependencies: {
+    "@clack/prompts": "^1.0.1",
+    "@inquirer/prompts": "^8.3.0",
+    boxen: "^8.0.1",
+    chalk: "^5.6.2",
+    "console-clear": "^1.1.1",
+    dax: "^0.45.0",
+    figures: "^6.1.0",
+    outdent: "^0.8.0",
+    "update-section": "^0.3.3"
+  }
+};
+
+// scripts/main.ts
+console.log(`Version ${package_default.version}`);
+var rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 console.log(boxen("XFCE Desktop Installation", { borderStyle: "double" }));
 console.log(source_default.underline("System Compatibility Check"));
 var systemCheckResults = await getSystemCheckResults();

@@ -1,24 +1,22 @@
 #!/usr/bin/env node
 import chalk from 'chalk'
-import clear from 'console-clear'
-import { outdent } from 'outdent'
 import { getSystemCheckResults } from '../utils/checks.ts'
-import { isCancel, text } from '@clack/prompts'
-import os from 'node:os'
-import path from 'node:path'
 import fs from 'node:fs'
-import $ from 'dax'
 import { pkgInstall, pkgUpgrade } from '../utils/pkg.ts'
 import boxen from 'boxen'
-import updateSection from 'update-section';
-import { ensureTermuxSetupStorage, getTermuxPrefix } from '../utils/termux.ts'
+import { ensureTermuxSetupStorage } from '../utils/termux.ts'
 import { addBashrcAliases } from '../utils/bashrc.ts'
 import { CORE_DEPENDENCIES, XFCE_PACKAGES } from '../constants/dependencies.ts'
 import { DEFAULT_DIRECTORIES } from '../constants/directories.ts'
 import readline from 'node:readline/promises'
+import packageJson from '../package.json'
 
-const rl = readline.createInterface(process.stdin);
+console.log(`Version ${packageJson.version}`)
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 // clear();
 console.log(boxen('XFCE Desktop Installation', { borderStyle: 'double' }))
