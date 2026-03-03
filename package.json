@@ -21,6 +21,7 @@
     "dax": "^0.45.0",
     "figures": "^6.1.0",
     "outdent": "^0.8.0",
+    "readline-sync": "^1.4.10",
     "update-section": "^0.3.3"
   }
 }

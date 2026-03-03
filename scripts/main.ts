@@ -16,20 +16,15 @@ import { addBashrcAliases } from '../utils/bashrc.ts'
 import { CORE_DEPENDENCIES, XFCE_PACKAGES } from '../constants/dependencies.ts'
 import { DEFAULT_DIRECTORIES } from '../constants/directories.ts'
 import { input } from '@inquirer/prompts'
+import readline from 'readline-sync'
 
-clear();
+// clear();
 console.log(boxen('XFCE Desktop Installation', { borderStyle: 'double' }))
 
 console.log(chalk.underline('System Compatibility Check'))
 const systemCheckResults = await getSystemCheckResults();
 
-const username = await input({
-  message: "Please enter username for proot installation: ",
-});
-
-if (isCancel(username)) {
-  process.exit(1);
-}
+const username = readline.question("Please enter username for proot installation: ")
 
 console.log("Ensuring Termux storage access is granted...");
 await ensureTermuxSetupStorage();
