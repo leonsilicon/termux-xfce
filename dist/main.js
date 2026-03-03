@@ -1,5 +1,4 @@
-#!/usr/bin/env bun
-// @bun
+#!/usr/bin/env node
 import { createRequire } from "node:module";
 var __create = Object.create;
 var __getProtoOf = Object.getPrototypeOf;
@@ -12132,7 +12131,7 @@ function createPath(path) {
 
 // utils/checks.ts
 async function checkPlatform() {
-  const platform5 = (await mod_default`uname -o`).stdout.toString().trim();
+  const platform5 = await mod_default`uname -o`.text();
   if (platform5 === "Android") {
     return {
       status: "ok",
@@ -12146,7 +12145,7 @@ async function checkPlatform() {
   }
 }
 async function checkArch() {
-  const arch2 = (await mod_default`uname -m`).stdout.toString().trim();
+  const arch2 = await mod_default`uname -m`.text();
   if (arch2 === "aarch64") {
     return {
       status: "ok",
@@ -12171,7 +12170,7 @@ function checkPrefix() {
   };
 }
 async function checkStorage() {
-  const freeSpace = (await mod_default`df -h $HOME | awk 'NR==2 {print $4}'`).stdout.toString().trim();
+  const freeSpace = await mod_default`df -h $HOME | awk 'NR==2 {print $4}'`.text();
   if (Number(freeSpace) > 4194304) {
     return {
       status: "ok",
@@ -12184,7 +12183,7 @@ async function checkStorage() {
   };
 }
 async function checkRam() {
-  const totalRam = (await mod_default`free -m | awk 'NR==2 {print $2}'`).stdout.toString().trim();
+  const totalRam = await mod_default`free -m | awk 'NR==2 {print $2}'`.text();
   if (Number(totalRam) > 2048) {
     return {
       status: "ok",
@@ -12209,14 +12208,14 @@ async function getSystemCheckResults() {
 // scripts/main.ts
 import_console_clear.default();
 console.log(import_outdent.outdent`
-  ${source_default.blue("\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557")}
-  ${source_default.blue("\u2551    XFCE Desktop Installation       \u2551")}
-  ${source_default.blue("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D")}
+  ${source_default.blue("╔════════════════════════════════════╗")}
+  ${source_default.blue("║    XFCE Desktop Installation       ║")}
+  ${source_default.blue("╚════════════════════════════════════╝")}
 `);
 console.log(import_outdent.outdent`
-  ${source_default.blue("\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557")}
-  ${source_default.blue("\u2551      System Compatibility Check    \u2551")}
-  ${source_default.blue("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D")}
+  ${source_default.blue("╔════════════════════════════════════╗")}
+  ${source_default.blue("║      System Compatibility Check    ║")}
+  ${source_default.blue("╚════════════════════════════════════╝")}
 `);
 var systemCheckResults = await getSystemCheckResults();
 console.log(systemCheckResults);

@@ -13,7 +13,7 @@ function printStatus(status: 'ok' | 'warn' | 'error', message: string) {
 }
 
 async function checkPlatform() {
-  const platform = (await $`uname -o`).stdout.toString().trim();
+  const platform = await $`uname -o`.text()
 
   if (platform === 'Android') {
     return {
@@ -29,7 +29,7 @@ async function checkPlatform() {
 }
 
 async function checkArch() {
-  const arch = (await $`uname -m`).stdout.toString().trim();
+  const arch = await $`uname -m`.text()
   if (arch === 'aarch64') {
     return {
       status: 'ok',
@@ -58,7 +58,7 @@ function checkPrefix() {
 }
 
 async function checkStorage() {
-  const freeSpace = (await $`df -h $HOME | awk 'NR==2 {print $4}'`).stdout.toString().trim();
+  const freeSpace = await $`df -h $HOME | awk 'NR==2 {print $4}'`.text()
   if (Number(freeSpace) > 4194304) {
     return {
       status: 'ok',
@@ -73,7 +73,7 @@ async function checkStorage() {
 }
 
 async function checkRam() {
-  const totalRam = (await $`free -m | awk 'NR==2 {print $2}'`).stdout.toString().trim();
+  const totalRam = await $`free -m | awk 'NR==2 {print $2}'`.text()
   if (Number(totalRam) > 2048) {
     return {
       status: 'ok',

@@ -6,7 +6,8 @@
     "build": "bun build scripts/main.ts --target=node --outdir=dist"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/console-clear": "^1.1.4"
   },
   "peerDependencies": {
     "typescript": "^5"
