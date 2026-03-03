@@ -1,7 +1,7 @@
 import $ from 'dax'
 
 export function pkgInstall(dependencies: string[]) {
-  return $`pkg install ${dependencies.join(' ')} -o Dpkg::Options::="--force-confold"`
+  return $`pkg install ${dependencies} -o Dpkg::Options::="--force-confold"`
 }
 
 export function pkgUpgrade() {
