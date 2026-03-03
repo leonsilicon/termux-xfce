@@ -1,9 +1,20 @@
-import $ from 'dax'
+import $ from 'dax';
+import which from 'which';
 
-export function pkgInstall(dependencies: string[]) {
-  return $`pkg install ${dependencies} -o Dpkg::Options::="--force-confold"`
+export async function hasAllDependencies(dependencies: string[]) {
+  for (const dependency of dependencies) {
+    if (!await which(dependency)) {
+      return false
+    }
+  }
+
+  return true
 }
 
-export function pkgUpgrade() {
+export function pkgInstallCommand(dependencies: string[]) {
+  return $`pkg install ${dependencies} -y -o Dpkg::Options::="--force-confold"`
+}
+
+export function pkgUpgradeCommand() {
   return $`pkg upgrade -y -o Dpkg::Options::="--force-confold"`
 }
