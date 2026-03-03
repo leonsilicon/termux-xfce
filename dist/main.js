@@ -12483,7 +12483,7 @@ import fs38 from "node:fs";
 
 // utils/pkg.ts
 function pkgInstall(dependencies) {
-  return mod_default`pkg install ${dependencies.join(" ")} -o Dpkg::Options::="--force-confold"`;
+  return mod_default`pkg install ${dependencies} -o Dpkg::Options::="--force-confold"`;
 }
 function pkgUpgrade() {
   return mod_default`pkg upgrade -y -o Dpkg::Options::="--force-confold"`;
